@@ -1,14 +1,88 @@
 version: 2
 
 models:
+  - name: stg_country
+    columns:
+      - name: country_id
+        description: "ID of the country"
+
   - name: stg_franchise
     columns:
       - name: franchise_id
         description: "ID of the franchise"
+
+  - name: stg_location
+    columns:
+      - name: location_id
+        description: "ID of the location"
+
+  - name: stg_menu
+    columns:
+      - name: menu_id
+        description: "ID of the menu"
+
+  - name: stg_order_detail
+    columns:
+      - name: order_detail_id
+        description: "ID of the order detail"
+
+  - name: stg_order_header
+    columns:
+      - name: order_id
+        description: "ID of the order"
+
+  - name: stg_truck
+    columns:
+      - name: truck_id
+        description: "ID of the truck"
+
+
+  - name: l1_country
+    columns:
+      - name: country_id
+        tests:
+          - unique
+          - not_null
+
   - name: l1_franchise
     columns:
       - name: franchise_id
-        data_tests:
+        tests:
+          - unique
+          - not_null
+
+  - name: l1_location
+    columns:
+      - name: location_id
+        tests:
+          - unique
+          - not_null
+
+  - name: l1_menu
+    columns:
+      - name: menu_id
+        tests:
+          - unique
+          - not_null
+
+  - name: l1_order_detail
+    columns:
+      - name: order_detail_id
+        tests:
+          - unique
+          - not_null
+
+  - name: l1_order_header
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+  - name: l1_truck
+    columns:
+      - name: truck_id
+        tests:
           - unique
           - not_null
           
