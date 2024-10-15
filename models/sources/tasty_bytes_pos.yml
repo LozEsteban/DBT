@@ -5,4 +5,10 @@ sources:
     database: tb_101  # El nombre de tu base de datos en Snowflake
     schema: raw_pos  # El nombre del esquema en Snowflake
     tables:
-      - name: franchise  # La tabla que estás utilizando en Snowflake
+      - name: franchise  # Tabla 1
+      - name: country  # Tabla 2
+      - name: location  # Tabla 3
+      - name: menu  # Tabla 4
+      - name: order_detail  # Tabla 5
+      - name: order_header  # Tabla 6
+      - name: truck  # Tabla 7
