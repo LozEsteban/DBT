@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: stg_franchise
+    columns:
+      - name: franchise_id
+        description: "ID of the franchise"
+  - name: l1_franchise
+    columns:
+      - name: franchise_id
+        data_tests:
+          - unique
+          - not_null
+          
