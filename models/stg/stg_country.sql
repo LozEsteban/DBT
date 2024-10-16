@@ -1,5 +1,5 @@
 WITH SRC AS (
-    SELECT * FROM {{ source('pos', 'franchise') }}
+    SELECT * FROM {{ source('pos', 'country') }}
 ),
 TRANSFORMED AS (
     SELECT
