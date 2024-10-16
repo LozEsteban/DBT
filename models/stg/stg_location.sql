@@ -1,16 +1,16 @@
 WITH SRC AS (
-    SELECT * FROM {{ source('pos', 'location') }}
+    SELECT * FROM {{ source('pos', 'location') }}  -- Llamas a los datos desde la tabla location
 ),
 TRANSFORMED AS (
     SELECT
-        FRANCHISE_ID,
-        FIRST_NAME AS ONWER_FIRST_NAME,
-        LAST_NAME AS OWNER_LAST_NAME,
-        CITY AS OWNER_CITY,
-        COUNTRY AS OWNER_COUNTRY,
-        LOWER(E_MAIL) AS EMAIL,
-        PHONE_NUMBER
+        LOCATION_ID,
+        PLACEKEY,
+        LOCATION AS LOCATION_NAME,  -- Renombrando la columna LOCATION a LOCATION_NAME
+        CITY AS CITY_NAME,  -- Renombrando la columna CITY
+        REGION,
+        ISO_COUNTRY_CODE,
+        COUNTRY AS COUNTRY_NAME  -- Renombrando la columna COUNTRY a COUNTRY_NAME
     FROM SRC
-    )
+)
 
 SELECT * FROM TRANSFORMED

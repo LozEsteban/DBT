@@ -1,16 +1,23 @@
 WITH SRC AS (
-    SELECT * FROM {{ source('pos', 'truck') }}
+    SELECT * FROM {{ source('pos', 'truck') }}  -- Llamas a los datos desde la tabla truck
 ),
 TRANSFORMED AS (
     SELECT
+        TRUCK_ID,
+        MENU_TYPE_ID,
+        PRIMARY_CITY,
+        REGION,
+        ISO_REGION,
+        COUNTRY,
+        ISO_COUNTRY_CODE,
+        FRANCHISE_FLAG,
+        YEAR,
+        MAKE,
+        MODEL,
+        EV_FLAG,
         FRANCHISE_ID,
-        FIRST_NAME AS ONWER_FIRST_NAME,
-        LAST_NAME AS OWNER_LAST_NAME,
-        CITY AS OWNER_CITY,
-        COUNTRY AS OWNER_COUNTRY,
-        LOWER(E_MAIL) AS EMAIL,
-        PHONE_NUMBER
+        TRUCK_OPENING_DATE  -- Mantienes la columna DATE sin cambios
     FROM SRC
-    )
+)
 
 SELECT * FROM TRANSFORMED

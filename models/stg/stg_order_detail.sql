@@ -1,16 +1,18 @@
 WITH SRC AS (
-    SELECT * FROM {{ source('pos', 'order_detail') }}
+    SELECT * FROM {{ source('pos', 'order_detail') }}  -- Llamas a los datos desde la tabla order_detail
 ),
 TRANSFORMED AS (
     SELECT
-        FRANCHISE_ID,
-        FIRST_NAME AS ONWER_FIRST_NAME,
-        LAST_NAME AS OWNER_LAST_NAME,
-        CITY AS OWNER_CITY,
-        COUNTRY AS OWNER_COUNTRY,
-        LOWER(E_MAIL) AS EMAIL,
-        PHONE_NUMBER
+        ORDER_DETAIL_ID,
+        ORDER_ID,
+        MENU_ITEM_ID,
+        DISCOUNT_ID,
+        LINE_NUMBER,
+        QUANTITY,
+        UNIT_PRICE,
+        PRICE,
+        ORDER_ITEM_DISCOUNT_AMOUNT  -- Mantienes la columna tal como está
     FROM SRC
-    )
+)
 
 SELECT * FROM TRANSFORMED
