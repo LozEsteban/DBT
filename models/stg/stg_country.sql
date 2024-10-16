@@ -1,26 +1,16 @@
 WITH SRC AS (
-    SELECT * FROM {{ source('pos', 'country') }}
+    SELECT * FROM {{ source('pos', 'country') }}  -- Llamas a los datos desde la tabla country
 ),
 TRANSFORMED AS (
     SELECT
-        FRANCHISE_ID,
-        FIRST_NAME AS ONWER_FIRST_NAME,
-        LAST_NAME AS OWNER_LAST_NAME,
-        CITY AS OWNER_CITY,
-        COUNTRY AS OWNER_COUNTRY,
-        LOWER(E_MAIL) AS EMAIL,
-        PHONE_NUMBER
+        COUNTRY_ID,
+        COUNTRY AS COUNTRY_NAME,  -- Renombrando la columna COUNTRY
+        ISO_CURRENCY,
+        ISO_COUNTRY,
+        CITY_ID,
+        CITY AS CITY_NAME,  -- Renombrando la columna CITY
+        CAST(CITY_POPULATION AS INT) AS CITY_POPULATION  -- Convertir CITY_POPULATION de VARCHAR a INT
     FROM SRC
-    )
+)
 
 SELECT * FROM TRANSFORMED
-
-create or replace TABLE TB_101.RAW_POS.COUNTRY (
-	COUNTRY_ID NUMBER(18,0),
-	COUNTRY VARCHAR(16777216),
-	ISO_CURRENCY VARCHAR(3),
-	ISO_COUNTRY VARCHAR(2),
-	CITY_ID NUMBER(19,0),
-	CITY VARCHAR(16777216),
-	CITY_POPULATION VARCHAR(16777216)
-);
