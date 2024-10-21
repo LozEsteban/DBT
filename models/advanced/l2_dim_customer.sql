@@ -1,6 +1,6 @@
 -- L2_DIM_CUSTOMER.sql
 WITH L1_franchise AS (
-    SELECT * FROM {{ ref('stg_franchise') }}
+    SELECT * FROM {{ ref('l1_franchise') }}
 )
 SELECT
     FRANCHISE_ID AS CUSTOMER_ID,

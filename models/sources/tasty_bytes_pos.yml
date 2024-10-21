@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: pos
-    database: tb_101  # El nombre de tu base de datos en Snowflake
-    schema: raw_pos  # El nombre del esquema en Snowflake
+    database: TB_!01  # El nombre de tu base de datos en Snowflake
+    schema: RAW_POS  # El nombre del esquema en Snowflake
     tables:
       - name: franchise  # Tabla 1
       - name: country  # Tabla 2

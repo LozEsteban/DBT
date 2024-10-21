@@ -1,5 +1,5 @@
 WITH L1_truck AS (
-    SELECT * FROM {{ ref('stg_truck') }}
+    SELECT * FROM {{ ref('l1_truck') }}
 )
 SELECT
     TRUCK_ID,
