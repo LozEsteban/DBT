@@ -1,4 +1,4 @@
-WITH src AS (
+/*WITH src AS (
     SELECT * FROM {{ ref('l1_customer') }}  -- Refiere al modelo de la capa L1
 )
 
