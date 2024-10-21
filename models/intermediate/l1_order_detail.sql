@@ -1,10 +1,10 @@
-WITH stg_order_detail AS (
-    SELECT * FROM {{ ref('stg_order_detail') }}
+-- ORDER HEADER
+WITH stg_order_header AS (
+    SELECT * FROM {{ ref('stg_order_header') }}
 ),
 deduped AS (
     SELECT * 
-    FROM stg_franchise
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY FRANCHISE_ID ORDER BY OWNER_CITY) = 1
+    FROM stg_order_header
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY ORDER_ID ORDER BY ORDER_TS) = 1
 )
-
-SELECT * FROM deduped
+SELECT * FROM deduped;

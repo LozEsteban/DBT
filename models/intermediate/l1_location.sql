@@ -1,10 +1,10 @@
+-- LOCATION
 WITH stg_location AS (
     SELECT * FROM {{ ref('stg_location') }}
 ),
 deduped AS (
     SELECT * 
-    FROM stg_franchise
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY FRANCHISE_ID ORDER BY OWNER_CITY) = 1
+    FROM stg_location
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY LOCATION_ID ORDER BY LOCATION_NAME) = 1
 )
-
-SELECT * FROM deduped
+SELECT * FROM deduped;

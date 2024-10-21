@@ -1,34 +1,26 @@
-/*WITH order_detail AS (
-    SELECT * FROM {{ ref('l1_order_detail') }}  -- Refiere al modelo de la capa L1
+-- Tabla de hechos que conecta las dimensiones creadas en L2
+
+WITH L1_order_detail AS (
+    SELECT * FROM {{ ref('stg_order_detail') }}
 ),
-customer AS (
-    SELECT * FROM {{ ref('l2_dim_customer') }}  -- Refiere al modelo L2 para la dimensión customer
+L2_customer AS (
+    SELECT CUSTOMER_ID FROM {{ ref('l2_dim_customer') }}
 ),
-truck AS (
-    SELECT * FROM {{ ref('l2_dim_truck') }}  -- Refiere al modelo L2 para la dimensión truck
+L2_truck AS (
+    SELECT TRUCK_ID FROM {{ ref('l2_dim_truck') }}
 ),
-product AS (
-    SELECT * FROM {{ ref('l2_dim_product') }}  -- Refiere al modelo L2 para la dimensión product
+L2_product AS (
+    SELECT PRODUCT_ID FROM {{ ref('l2_dim_product') }}
 )
 
 SELECT
-    od.ORDER_DETAIL_ID,
-    od.CUSTOMER_ID,
-    c.FULL_NAME AS CUSTOMER_FULL_NAME,
-    t.TRUCK_ID,
-    t.TRUCK_BRAND_NAME,
-    t.CAR_BRAND,
-    t.MODEL,
-    t.YEAR,
-    p.PRODUCT_ID,
-    p.PRODUCT_NAME,
-    p.PRODUCT_CATEGORY,
-    p.PRODUCT_SUBCATEGORY,
-    od.UNIT_PRICE,
-    od.QUANTITY,
-    od.UNIT_PRICE * od.QUANTITY AS TOTAL_PRICE  -- Calculo el total
-FROM
-    order_detail od
-    LEFT JOIN customer c ON od.CUSTOMER_ID = c.CUSTOMER_ID
-    LEFT JOIN truck t ON od.TRUCK_ID = t.TRUCK_ID
-    LEFT JOIN product p ON od.PRODUCT_ID = p.PRODUCT_ID
+    ORDER_DETAIL_ID,
+    od.ORDER_ID AS CUSTOMER_ID,   -- FK que conecta con L2_DIM_CUSTOMER
+    od.TRUCK_ID,                  -- FK que conecta con L2_DIM_TRUCK
+    od.MENU_ITEM_ID AS PRODUCT_ID, -- FK que conecta con L2_DIM_PRODUCT
+    UNIT_PRICE,                   -- Original de L1
+    QUANTITY                      -- Original de L1
+FROM L1_order_detail od
+LEFT JOIN L2_customer c ON od.ORDER_ID = c.CUSTOMER_ID
+LEFT JOIN L2_truck t ON od.TRUCK_ID = t.TRUCK_ID
+LEFT JOIN L2_product p ON od.MENU_ITEM_ID = p.PRODUCT_ID;

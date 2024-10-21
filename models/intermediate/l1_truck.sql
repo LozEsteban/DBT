@@ -1,10 +1,10 @@
+-- TRUCK
 WITH stg_truck AS (
     SELECT * FROM {{ ref('stg_truck') }}
 ),
 deduped AS (
     SELECT * 
-    FROM stg_franchise
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY FRANCHISE_ID ORDER BY OWNER_CITY) = 1
+    FROM stg_truck
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY TRUCK_ID ORDER BY TRUCK_OPENING_DATE) = 1
 )
-
-SELECT * FROM deduped
+SELECT * FROM deduped;
