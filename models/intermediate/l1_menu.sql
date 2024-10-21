@@ -1,10 +1,10 @@
 -- MENU
-WITH stg_menu AS (
-    SELECT * FROM {{ ref('stg_menu') }}
-),
-deduped AS (
-    SELECT * 
-    FROM stg_menu
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY MENU_ID ORDER BY MENU_ITEM_NAME) = 1
-)
-SELECT * FROM deduped;
+with
+    stg_menu as (select * from {{ ref("stg_menu") }}),
+    deduped as (
+        select *
+        from stg_menu
+        qualify row_number() over (partition by menu_id order by menu_item_name) = 1
+    )
+select *
+from deduped

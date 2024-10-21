@@ -16,4 +16,3 @@ from l1_order_detail od
 left join l2_customer c on od.order_id = c.customer_id
 left join l2_truck t on od.truck_id = t.truck_id
 left join l2_product p on od.menu_item_id = p.product_id
-;

@@ -1,10 +1,8 @@
-WITH L1_truck AS (
-    SELECT * FROM {{ ref('l1_truck') }}
-)
-SELECT
-    TRUCK_ID,
-    TRUCK_BRAND_NAME,  -- Original de L1
-    MAKE AS CAR_BRAND,  -- Renombramos MAKE a CAR_BRAND
-    MODEL,              -- Original de L1
-    YEAR                -- Original de L1
-FROM L1_truck;
+with l1_truck as (select * from {{ ref("l1_truck") }})
+select
+    truck_id,
+    truck_brand_name,  -- Original de L1
+    make as car_brand,  -- Renombramos MAKE a CAR_BRAND
+    model,  -- Original de L1
+    year  -- Original de L1
+from l1_truck

@@ -1,10 +1,11 @@
 -- COUNTRY
-WITH stg_country AS (
-    SELECT * FROM {{ ref('stg_country') }}
-),
-deduped AS (
-    SELECT * 
-    FROM stg_country
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY COUNTRY_ID ORDER BY COUNTRY_NAME) = 1
-)
-SELECT * FROM deduped;
+with
+    stg_country as (select * from {{ ref("stg_country") }}),
+    deduped as (
+        select *
+        from stg_country
+        qualify row_number() over (partition by country_id order by city_id) = 1  -- Ordena por CITY_ID para seleccionar la primera ciudad
+    )
+select *
+from deduped
+
