@@ -1,5 +1,5 @@
 WITH L1_menu AS (
-    SELECT * FROM {{ ref('stg_menu') }}
+    SELECT * FROM {{ ref('l1_menu') }}
 )
 SELECT
     MENU_ITEM_ID AS PRODUCT_ID,         -- Renombramos MENU_ITEM_ID a PRODUCT_ID
