@@ -1,4 +1,4 @@
-WITH order_detail AS (
+/*WITH order_detail AS (
     SELECT * FROM {{ ref('l1_order_detail') }}  -- Refiere al modelo de la capa L1
 ),
 customer AS (
