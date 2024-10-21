@@ -1,9 +1,7 @@
-WITH L1_menu AS (
-    SELECT * FROM {{ ref('l1_menu') }}
-)
-SELECT
-    MENU_ITEM_ID AS PRODUCT_ID,         -- Renombramos MENU_ITEM_ID a PRODUCT_ID
-    MENU_ITEM_NAME AS PRODUCT_NAME,     -- Renombramos MENU_ITEM_NAME a PRODUCT_NAME
-    ITEM_CATEGORY AS PRODUCT_CATEGORY,  -- Renombramos ITEM_CATEGORY a PRODUCT_CATEGORY
-    ITEM_SUBCATEGORY AS PRODUCT_SUBCATEGORY -- Renombramos ITEM_SUBCATEGORY a PRODUCT_SUBCATEGORY
-FROM L1_menu;
+with l1_menu as (select * from {{ ref("l1_menu") }})
+select
+    menu_item_id as product_id,  -- Renombramos MENU_ITEM_ID a PRODUCT_ID
+    menu_item_name as product_name,  -- Renombramos MENU_ITEM_NAME a PRODUCT_NAME
+    item_category as product_category,  -- Renombramos ITEM_CATEGORY a PRODUCT_CATEGORY
+    item_subcategory as product_subcategory  -- Renombramos ITEM_SUBCATEGORY a PRODUCT_SUBCATEGORY
+from l1_menu

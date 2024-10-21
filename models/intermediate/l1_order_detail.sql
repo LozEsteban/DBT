@@ -1,10 +1,10 @@
 -- ORDER HEADER
-WITH stg_order_header AS (
-    SELECT * FROM {{ ref('stg_order_header') }}
-),
-deduped AS (
-    SELECT * 
-    FROM stg_order_header
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY ORDER_ID ORDER BY ORDER_TS) = 1
-)
-SELECT * FROM deduped;
+with
+    stg_order_header as (select * from {{ ref("stg_order_header") }}),
+    deduped as (
+        select *
+        from stg_order_header
+        qualify row_number() over (partition by order_id order by order_ts) = 1
+    )
+select *
+from deduped

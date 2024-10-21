@@ -1,14 +1,12 @@
 -- L2_DIM_CUSTOMER.sql
-WITH L1_franchise AS (
-    SELECT * FROM {{ ref('l1_franchise') }}
-)
-SELECT
-    FRANCHISE_ID AS CUSTOMER_ID,
-    FIRST_NAME,
-    LAST_NAME,
-    CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME,
-    COUNTRY AS CUSTOMER_COUNTRY,
-    CITY AS CUSTOMER_CITY,
-    'Unknown' AS GENDER,  -- Suponiendo que no tienes datos de género
-    EMAIL
-FROM L1_franchise;
+with l1_franchise as (select * from {{ ref("l1_franchise") }})
+select
+    franchise_id as customer_id,
+    first_name,
+    last_name,
+    concat(first_name, ' ', last_name) as full_name,
+    country as customer_country,
+    city as customer_city,
+    'Unknown' as gender,
+    email
+from l1_franchise
