@@ -1,14 +1,14 @@
-/*WITH src AS (
-    SELECT * FROM {{ ref('l1_customer') }}  -- Refiere al modelo de la capa L1
+-- L2_DIM_CUSTOMER.sql
+WITH L1_franchise AS (
+    SELECT * FROM {{ ref('stg_franchise') }}
 )
-
 SELECT
-    CUSTOMER_ID,
+    FRANCHISE_ID AS CUSTOMER_ID,
     FIRST_NAME,
     LAST_NAME,
-    CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME,  -- Calcula el nombre completo
-    COUNTRY,
-    CITY,
-    GENDER,
+    CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME,
+    COUNTRY AS CUSTOMER_COUNTRY,
+    CITY AS CUSTOMER_CITY,
+    'Unknown' AS GENDER,  -- Suponiendo que no tienes datos de género
     EMAIL
-FROM src
+FROM L1_franchise;

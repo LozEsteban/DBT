@@ -1,10 +1,10 @@
+-- COUNTRY
 WITH stg_country AS (
     SELECT * FROM {{ ref('stg_country') }}
 ),
 deduped AS (
     SELECT * 
-    FROM stg_franchise
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY FRANCHISE_ID ORDER BY OWNER_CITY) = 1
+    FROM stg_country
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY COUNTRY_ID ORDER BY COUNTRY_NAME) = 1
 )
-
-SELECT * FROM deduped
+SELECT * FROM deduped;
